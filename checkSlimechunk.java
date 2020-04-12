@@ -3,7 +3,12 @@ import java.util.Random;
 public class checkSlimechunk{ 
 
     public static void main(String args[]) 
-    { 
+    {
+        if (args.length == 0) {
+            System.out.println(
+                "Proper usage is:\n\tjava checkSlimechunk <seed> <x-coord> <z-coord>");
+            System.exit(0);
+        } 
         // the seed from /seed as a 64bit long literal
         long seed = 0;
         int xPosition = 0;
@@ -26,6 +31,11 @@ public class checkSlimechunk{
             System.out.println("Please enter a valid z-coordinate");
             System.exit(0);
         }
+        
+        System.out.println("Checking based on the following parameters:");
+        System.out.println("Seed = " + seed);
+        System.out.println("X-Coordinate = " + xPosition);
+        System.out.println("Z-Coordinate = " + zPosition);
 
         Random rnd = new Random(
                 seed +
@@ -34,8 +44,10 @@ public class checkSlimechunk{
                 (int) (zPosition * zPosition) * 0x4307a7L +
                 (int) (zPosition * 0x5f24f) ^ 0x3ad8025f
         );
+        
+        boolean isSlimeChunk = (rnd.nextInt(10) == 0);
 
-        System.out.println(rnd.nextInt(10) == 0);
+        System.out.println(isSlimeChunk);
     } 
 }
 
