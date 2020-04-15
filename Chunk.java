@@ -1,0 +1,37 @@
+import Block;
+import Math;
+
+public class Chunk {
+    // number of blocks along one horizontal side of chunk
+    public int length = 16;
+    
+    // slime-chunk status
+    private boolean isSlimeChunk;
+    // northwesterly-most block, e.g. (0,0) in chunk (0,0)
+    private Block minBlock;
+    // southeasterly-most block, e.g. (15,15) in chunk (0,0)
+    private Block maxBlock;
+    
+    public Chunk(Block inBlock) {
+        minBlock = calculateMinBlock(inBlock);
+        // calculate maxBlock by offsetting it xzSize-1 from minBlock
+        maxBlock = new Block(minBlock.getX() + (xzSize - 1),
+                             minBlock.getZ() + (xzSize - 1));
+    }
+    
+    // floor coordinate to find chunk's "base" coordinate
+    private Block calculateMinBlock(Block inBlock) {
+        int minX = floorBlockCoordinate(inBlock.getX());
+        int minZ = floorBlockCoordinate(inBlock.getZ());
+        return Block(minX, minZ);
+    }
+    
+    // calculate the minBlock by flooring inBlock's values to multiples of 16
+    private int floorBlockCoordinate(int inCoord) {
+        // floor to multiple of xzSize (16)
+        int outCoord = Math.floorDiv(inCoord, xzSize);
+        // inflate back to full xzSize...size
+        outCoord *= xzSize;
+        return outCoord;
+    }
+}
