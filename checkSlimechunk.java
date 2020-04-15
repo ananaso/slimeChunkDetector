@@ -1,14 +1,14 @@
-import java.util.Random; 
+import java.util.Random;
 
 public class checkSlimechunk{ 
 
-    public static void main(String args[]) 
+    public static void main(String args[])
     {
         if (args.length == 0) {
             System.out.println(
                 "Proper usage is:\n\tjava checkSlimechunk <seed> <x-coord> <z-coord>");
             System.exit(0);
-        } 
+        }
         // the seed from /seed as a 64bit long literal
         long seed = 0;
         int xPosition = 0;
@@ -48,7 +48,7 @@ public class checkSlimechunk{
         boolean isSlimeChunk = (rnd.nextInt(10) == 0);
 
         System.out.println(isSlimeChunk);
-    } 
+    }
 }
 
 // testing seed: 6044327026281940370
