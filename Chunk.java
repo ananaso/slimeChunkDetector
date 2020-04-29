@@ -14,9 +14,9 @@ public class Chunk {
     
     public Chunk(Block inBlock) {
         minBlock = calculateMinBlock(inBlock);
-        // calculate maxBlock by offsetting it xzSize-1 from minBlock
-        maxBlock = new Block(minBlock.getX() + (xzSize - 1),
-                             minBlock.getZ() + (xzSize - 1));
+        // calculate maxBlock by offsetting it length-1 from minBlock
+        maxBlock = new Block(minBlock.getX() + (length - 1),
+                             minBlock.getZ() + (length - 1));
     }
     
     // floor coordinate to find chunk's "base" coordinate
@@ -28,10 +28,10 @@ public class Chunk {
     
     // calculate the minBlock by flooring inBlock's values to multiples of 16
     private int floorBlockCoordinate(int inCoord) {
-        // floor to multiple of xzSize (16)
-        int outCoord = Math.floorDiv(inCoord, xzSize);
-        // inflate back to full xzSize...size
-        outCoord *= xzSize;
+        // floor to multiple of length (16)
+        int outCoord = Math.floorDiv(inCoord, length);
+        // inflate back to full length...size
+        outCoord *= length;
         return outCoord;
     }
 }
