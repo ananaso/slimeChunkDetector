@@ -32,7 +32,7 @@ public class testChunk{
             int maxZ = maxBlock.getZ();
             System.out.println("Chunk " + i +
                                ": inBlock(" + inX + ", " + inZ +
-                               ")\tMin(" + minX + ", " + minZ +
+                               ") ->\tMin(" + minX + ", " + minZ +
                                ")\tMax(" + maxX + ", " + maxZ + ")");
             i++;
         }
