@@ -1,5 +1,3 @@
-import Math;
-
 public class Chunk {
     // number of blocks along one horizontal side of chunk
     public int length = 16;
@@ -21,7 +19,7 @@ public class Chunk {
     private Block calculateMinBlock(Block inBlock) {
         int minX = floorBlockCoordinate(inBlock.getX());
         int minZ = floorBlockCoordinate(inBlock.getZ());
-        return Block(minX, minZ);
+        return new Block(minX, minZ);
     }
     
     // calculate the minBlock by flooring inBlock's values to multiples of 16
@@ -38,6 +36,19 @@ public class Chunk {
         // length-1 because chunks are (pseudo) zero-indexed
         int maxX = this.minBlock.getX() + length - 1;
         int maxZ = this.minBlock.getZ() + length - 1;
-        return Block(maxX, maxZ);
+        return new Block(maxX, maxZ);
+    }
+    
+    // getters
+    public Block getMinBlock() {
+        return minBlock;
+    }
+    
+    public Block getMaxBlock() {
+        return maxBlock;
+    }
+    
+    public boolean isSlimeChunk() {
+        return isSlimeChunk;
     }
 }
