@@ -14,7 +14,7 @@ public class testBlock{
                 i++;
             }
         }
-        // out each block coordinates
+        // print out each block coordinates
         i = 0;
         for (Block blk : testBlocks) {
             int x = blk.getX();
