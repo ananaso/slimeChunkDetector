@@ -15,8 +15,7 @@ public class Chunk {
     public Chunk(Block inBlock) {
         minBlock = calculateMinBlock(inBlock);
         // calculate maxBlock by offsetting it length-1 from minBlock
-        maxBlock = new Block(minBlock.getX() + (length - 1),
-                             minBlock.getZ() + (length - 1));
+        maxBlock = calculateMaxBlock();
     }
     
     // floor coordinate to find chunk's "base" coordinate
@@ -33,5 +32,13 @@ public class Chunk {
         // inflate back to full length...size
         outCoord *= length;
         return outCoord;
+    }
+    
+    // calculate the maxBlock by adjusting the minBlock by length - 1
+    private Block calculateMaxBlock() {
+        // length-1 because chunks are (pseudo) zero-indexed
+        int maxX = this.minBlock.getX() + length - 1;
+        int maxZ = this.minBlock.getZ() + length - 1;
+        return Block(maxX, maxZ);
     }
 }
