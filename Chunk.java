@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Chunk {
     // number of blocks along one horizontal side of chunk
     public int length = 16;
@@ -9,10 +11,10 @@ public class Chunk {
     // southeasterly-most block, e.g. (15,15) in chunk (0,0)
     private Block maxBlock;
     
-    public Chunk(Block inBlock) {
+    public Chunk(Block inBlock, long seed) {
         minBlock = calculateMinBlock(inBlock);
-        // calculate maxBlock by offsetting it length-1 from minBlock
         maxBlock = calculateMaxBlock();
+        isSlimeChunk = checkForSlimes(seed);
     }
     
     // floor coordinate to find chunk's "base" coordinate
@@ -37,6 +39,23 @@ public class Chunk {
         int maxX = this.minBlock.getX() + length - 1;
         int maxZ = this.minBlock.getZ() + length - 1;
         return new Block(maxX, maxZ);
+    }
+    
+    private boolean checkForSlimes(long seed) {
+    	// the seed from /seed as a 64bit long literal
+        int xPosition = minBlock.getX() / 16;
+        int zPosition = minBlock.getZ() / 16;
+        
+        Random rnd = new Random(
+                seed +
+                (int) (xPosition * xPosition * 0x4c1906) +
+                (int) (xPosition * 0x5ac0db) +
+                (int) (zPosition * zPosition) * 0x4307a7L +
+                (int) (zPosition * 0x5f24f) ^ 0x3ad8025f
+        );
+        
+        boolean thereAreSlimes = (rnd.nextInt(10) == 0);
+        return thereAreSlimes;
     }
     
     // getters
