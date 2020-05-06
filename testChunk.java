@@ -4,6 +4,7 @@
 public class testChunk{
     public static void main(String args[]) {
         int[] testCoordVals = {0, -5, 23};
+        long seed = 6044327026281940370L;
         Block[] testBlocks = new Block[9];
         Chunk[] testChunks = new Chunk[9];
 
@@ -13,7 +14,7 @@ public class testChunk{
             for (int z : testCoordVals) {
                 Block testBlock = new Block(x, z);
                 testBlocks[i] = testBlock;
-                testChunks[i] = new Chunk(testBlock);
+                testChunks[i] = new Chunk(testBlock, seed);
                 i++;
             }
         }
@@ -30,10 +31,11 @@ public class testChunk{
             int minZ = minBlock.getZ();
             int maxX = maxBlock.getX();
             int maxZ = maxBlock.getZ();
-            System.out.println("Chunk " + i +
-                               ": inBlock(" + inX + ", " + inZ +
+            System.out.println("Chunk " + i + ":" +
+                               "\n\tinBlock(" + inX + ", " + inZ +
                                ") ->\tMin(" + minX + ", " + minZ +
-                               ")\tMax(" + maxX + ", " + maxZ + ")");
+                               ")\tMax(" + maxX + ", " + maxZ + ")" +
+                               "\n\tisSlimeChunk: " + chnk.isSlimeChunk());
             i++;
         }
     }
