@@ -36,18 +36,21 @@ public class checkSlimechunk{
         System.out.println("Seed = " + seed);
         System.out.println("X-Coordinate = " + xPosition);
         System.out.println("Z-Coordinate = " + zPosition);
-
+        
+        int xChunk = xPosition / 16;
+        int zChunk = zPosition / 16;
+        
         Random rnd = new Random(
                 seed +
-                (int) (xPosition * xPosition * 0x4c1906) +
-                (int) (xPosition * 0x5ac0db) +
-                (int) (zPosition * zPosition) * 0x4307a7L +
-                (int) (zPosition * 0x5f24f) ^ 0x3ad8025f
+                (int) (xChunk * xChunk * 0x4c1906) +
+                (int) (xChunk * 0x5ac0db) +
+                (int) (zChunk * zChunk) * 0x4307a7L +
+                (int) (zChunk * 0x5f24f) ^ 0x3ad8025f
         );
         
         boolean isSlimeChunk = (rnd.nextInt(10) == 0);
 
-        System.out.println(isSlimeChunk);
+        System.out.println("Slimes? " + isSlimeChunk);
     }
 }
 
