@@ -32,7 +32,7 @@ public class checkSlimechunk{
             System.exit(0);
         }
         
-        Chunk testChunk = new Chunk(xPosition, zPosition, seed);
+        Chunk testChunk = new Chunk(seed, xPosition, zPosition);
         
         System.out.println("Checking based on the following parameters:");
         System.out.println("Seed = " + seed);

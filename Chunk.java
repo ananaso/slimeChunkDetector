@@ -12,14 +12,14 @@ public class Chunk {
     private Block maxBlock;
     
     // constructor using a block as coordinate input
-    public Chunk(Block inBlock, long seed) {
+    public Chunk(long seed, Block inBlock) {
         minBlock = calculateMinBlock(inBlock);
         maxBlock = calculateMaxBlock();
         isSlimeChunk = checkForSlimes(seed);
     }
     
     // constructor using individual coordinates as coordinate input
-    public Chunk(int X, int Z, long seed) {
+    public Chunk(long seed, int X, int Z) {
         Block inBlock = new Block(X, Z);
         minBlock = calculateMinBlock(inBlock);
         maxBlock = calculateMaxBlock();

@@ -14,7 +14,7 @@ public class testChunk{
             for (int z : testCoordVals) {
                 Block testBlock = new Block(x, z);
                 testBlocks[i] = testBlock;
-                testChunks[i] = new Chunk(testBlock, seed);
+                testChunks[i] = new Chunk(seed, testBlock);
                 i++;
             }
         }
