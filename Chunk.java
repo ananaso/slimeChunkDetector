@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Chunk {
     // number of blocks along one horizontal side of chunk
-    public int length = 16;
+    private int length = 16;
     
     // slime-chunk status
     private boolean isSlimeChunk;
@@ -10,6 +10,8 @@ public class Chunk {
     private Block minBlock;
     // southeasterly-most block, e.g. (15,15) in chunk (0,0)
     private Block maxBlock;
+    // internal chunk-baed coordinate system
+    private Block chunkCoord;
     
     // constructor using individual coordinates as coordinate input
     public Chunk(long seed, int X, int Z) {
@@ -20,6 +22,7 @@ public class Chunk {
     public Chunk(long seed, Block inBlock) {
         minBlock = calculateMinBlock(inBlock);
         maxBlock = calculateMaxBlock();
+        chunkCoord = calculateChunkCoord();
         isSlimeChunk = checkForSlimes(seed);
     }
     
@@ -47,17 +50,24 @@ public class Chunk {
         return new Block(maxX, maxZ);
     }
     
+    // calculate the chunkCoord by removing chunk length from coordinates
+    private Block calculateChunkCoord() {
+        int xPos = minBlock.getX() / length;
+        int zPos = minBlock.getZ() / length;
+        return new Block(xPos, zPos);
+    }
+    
     private boolean checkForSlimes(long seed) {
     	// the seed from /seed as a 64bit long literal
-        int xPosition = minBlock.getX() / 16;
-        int zPosition = minBlock.getZ() / 16;
-        
+    	int x = chunkCoord.getX();
+    	int z = chunkCoord.getZ();
+    	
         Random rnd = new Random(
                 seed +
-                (int) (xPosition * xPosition * 0x4c1906) +
-                (int) (xPosition * 0x5ac0db) +
-                (int) (zPosition * zPosition) * 0x4307a7L +
-                (int) (zPosition * 0x5f24f) ^ 0x3ad8025f
+                (int) (x * x * 0x4c1906) +
+                (int) (x * 0x5ac0db) +
+                (int) (z * z) * 0x4307a7L +
+                (int) (z * 0x5f24f) ^ 0x3ad8025f
         );
         
         boolean thereAreSlimes = (rnd.nextInt(10) == 0);
