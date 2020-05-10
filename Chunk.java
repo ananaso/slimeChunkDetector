@@ -11,16 +11,13 @@ public class Chunk {
     // southeasterly-most block, e.g. (15,15) in chunk (0,0)
     private Block maxBlock;
     
-    // constructor using a block as coordinate input
-    public Chunk(long seed, Block inBlock) {
-        minBlock = calculateMinBlock(inBlock);
-        maxBlock = calculateMaxBlock();
-        isSlimeChunk = checkForSlimes(seed);
-    }
-    
     // constructor using individual coordinates as coordinate input
     public Chunk(long seed, int X, int Z) {
-        Block inBlock = new Block(X, Z);
+        this(seed, new Block(X, Z));
+    }
+    
+    // constructor using a block as coordinate input
+    public Chunk(long seed, Block inBlock) {
         minBlock = calculateMinBlock(inBlock);
         maxBlock = calculateMaxBlock();
         isSlimeChunk = checkForSlimes(seed);
